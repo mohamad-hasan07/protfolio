@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Portfolio | Creative Professional</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6c63ff;
+            --secondary: #4d44db;
+            --accent: #ff6584;
+            --dark: #2d3748;
+            --light: #f8fafc;
+            --gray: #94a3b8;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+        
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(10px);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .nav-link {
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            margin: 0 0.25rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary);
+            background-color: rgba(108, 99, 255, 0.1);
+        }
+        
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, rgba(108, 99, 255, 0.1) 0%, rgba(108, 99, 255, 0) 100%);
+        }
+        
+        .hero-content {
+            padding-top: 6rem;
+            padding-bottom: 6rem;
+        }
+        
+        .profile-image {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 8px solid var(--light);
+            box-shadow: 0 20px 30px rgba(108, 99, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .profile-image:hover {
+            transform: scale(1.03);
+        }
+        
+        .highlight-text {
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 2rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--secondary);
+            border-color: var(--secondary);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px rgba(108, 99, 255, 0.2);
+        }
+        
+        .btn-outline-primary {
+            color: var(--primary);
+            border-color: var(--primary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 2rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline-primary:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px rgba(108, 99, 255, 0.2);
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2.5rem;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 50px;
+            height: 4px;
+            background-color: var(--primary);
+            border-radius: 2px;
+        }
+        
+        .card {
+            border: none;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-img-top {
+            height: 200px;
+            object-fit: cover;
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover .card-img-top {
+            transform: scale(1.05);
+        }
+        
+        .skill-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            margin: 0.25rem;
+            background-color: rgba(108, 99, 255, 0.1);
+            color: var(--primary);
+            border-radius: 2rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .skill-badge:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .contact-form .form-control {
+            border-radius: 0.5rem;
+            padding: 1rem;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .contact-form .form-control:focus {
+            box-shadow: 0 0 0 0.25rem rgba(108, 99, 255, 0.25);
+            border-color: var(--primary);
+        }
+        
+        .footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0;
+        }
+        
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: rgb(1, 34, 224);
+            margin: 0 0.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 3rem;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 1rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: var(--primary);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -3rem;
+            top: 0.25rem;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            background-color: var(--primary);
+            border: 3px solid var(--light);
+        }
+        
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            z-index: -1;
+        }
+        
+        .shape {
+            position: absolute;
+            opacity: 0.2;
+            border-radius: 50%;
+        }
+        
+        .shape-1 {
+            width: 200px;
+            height: 200px;
+            background-color: var(--primary);
+            top: -100px;
+            right: -100px;
+            animation: float 10s ease-in-out infinite;
+        }
+        
+        .shape-2 {
+            width: 300px;
+            height: 300px;
+            background-color: var(--accent);
+            bottom: -150px;
+            left: -150px;
+            animation: float 12s ease-in-out infinite;
+            animation-delay: 2s;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(10px, 10px) rotate(5deg);
+            }
+            50% {
+                transform: translate(-10px, 20px) rotate(-5deg);
+            }
+            75% {
+                transform: translate(15px, -10px) rotate(3deg);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-content {
+                padding-top: 4rem;
+                padding-bottom: 4rem;
+                text-align: center;
+            }
+            
+            .profile-image {
+                width: 200px;
+                height: 200px;
+                margin: 0 auto 2rem;
+            }
+            
+            .hero-buttons {
+                justify-content: center;
+            }
+            
+            .timeline {
+                padding-left: 1.5rem;
+            }
+            
+            .timeline::before {
+                left: 0.5rem;
+            }
+            
+            .timeline-item::before {
+                left: -1.5rem;
+            }
+        }
+    </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="100">
+    <!-- Floating Background Shapes -->
+    <div class="floating-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+    </div>
+    
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Portfolio</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="bi bi-list"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#skills">Skills</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#portfolio">Portfolio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#experience">Experience</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="hero-content">
+                        <h6 class="text-muted">Hello, I'm</h6>
+                        <h1 class="display-4 fw-bold mb-4">MOHHAMAD HASSAN</h1>
+                        <h3 class="mb-4">Creative <span class="highlight-text">Frontend Developer</span></h3>
+                        <p class="lead mb-4">I craft beautiful, responsive websites with modern technologies and design principles that focus on user experience and performance.</p>
+                        <div class="d-flex flex-wrap hero-buttons">
+                            <a href="#contact" class="btn btn-primary me-3 mb-3">Hire Me</a>
+                            <a href="#portfolio" class="btn btn-outline-primary mb-3">View Work</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <img src="images/download (4).jpeg" class="profile-image" alt="Professional portrait of Jane Doe smiling in modern office attire with soft blurred background">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section id="about" class="py-5">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="row">
+                <div class="col-lg-6">
+                    <p>With over 5 years of experience in frontend development, I've helped numerous clients transform their digital presence through thoughtful design and clean, efficient code.</p>
+                    <p>My journey began in graphic design before transitioning to web development, giving me a unique perspective on both visual design and technical implementation.</p>
+                    <p>When I'm not coding, you can find me hiking local trails, exploring new coffee shops, or experimenting with photography and digital art.</p>
+                </div>
+                <div class="col-lg-6">
+                    <div class="row mt-3 mt-lg-0">
+                        <div class="col-md-6 mb-3">
+                            <div class="card p-4 h-100">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="bi bi-award-fill fs-2 me-3" style="color: var(--primary);"></i>
+                                    <h5 class="mb-0">5+ Years</h5>
+                                </div>
+                                <p class="mb-0">Professional Experience</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="card p-4 h-100">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="bi bi-check-circle-fill fs-2 me-3" style="color: var(--accent);"></i>
+                                    <h5 class="mb-0">50+ Projects</h5>
+                                </div>
+                                <p class="mb-0">Completed Successfully</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="card p-4 h-100">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="bi bi-globe fs-2 me-3" style="color: var(--secondary);"></i>
+                                    <h5 class="mb-0">15+ Clients</h5>
+                                </div>
+                                <p class="mb-0">From Various Industries</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="card p-4 h-100">
+                                <div class="d-flex align-items-center mb-3">
+                                    <i class="bi bi-hand-thumbs-up-fill fs-2 me-3" style="color: var(--primary);"></i>
+                                    <h5 class="mb-0">24/7</h5>
+                                </div>
+                                <p class="mb-0">Support Available</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Skills Section -->
+    <section id="skills" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title">My Skills</h2>
+            <div class="row">
+                <div class="col-md-6 mb-5">
+                    <h4 class="mb-4">Technical Skills</h4>
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>HTML/CSS</span>
+                            <span>95%</span>
+                        </div>
+                        <div class="progress" style="height: 8px;">
+                            <div class="progress-bar" role="progressbar" style="width: 95%; background-color: var(--primary);" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>JavaScript</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="progress" style="height: 8px;">
+                            <div class="progress-bar" role="progressbar" style="width: 90%; background-color: var(--secondary);" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>React</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="progress" style="height: 8px;">
+                            <div class="progress-bar" role="progressbar" style="width: 85%; background-color: var(--accent);" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>UI/UX Design</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="progress" style="height: 8px;">
+                            <div class="progress-bar" role="progressbar" style="width: 80%; background-color: var(--primary);" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-5">
+                    <h4 class="mb-4">Professional Skills</h4>
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Communication</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="progress" style="height: 8px;">
+                            <div class="progress-bar" role="progressbar" style="width: 90%; background-color: var(--secondary);" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Teamwork</span>
+                            <span>85%</span>
+                        </div>
+                        <div class="progress" style="height: 8px;">
+                            <div class="progress-bar" role="progressbar" style="width: 85%; background-color: var(--accent);" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Project Management</span>
+                            <span>80%</span>
+                        </div>
+                        <div class="progress" style="height: 8px;">
+                            <div class="progress-bar" role="progressbar" style="width: 80%; background-color: var(--primary);" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Creativity</span>
+                            <span>95%</span>
+                        </div>
+                        <div class="progress" style="height: 8px;">
+                            <div class="progress-bar" role="progressbar" style="width: 95%; background-color: var(--secondary);" aria-valuenow="95" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <h4 class="mb-4">Technologies I Work With</h4>
+                    <div class="d-flex flex-wrap">
+                        <span class="skill-badge"><i class="bi bi-filetype-html me-2"></i>HTML5</span>
+                        <span class="skill-badge"><i class="bi bi-filetype-css me-2"></i>CSS3</span>
+                        <span class="skill-badge"><i class="fab fa-js me-2"></i>JavaScript</span>
+                        <span class="skill-badge"><i class="fab fa-react me-2"></i>React</span>
+                        <span class="skill-badge"><i class="fab fa-bootstrap me-2"></i>Bootstrap</span>
+                        <span class="skill-badge"><i class="fab fa-sass me-2"></i>SASS</span>
+                        <span class="skill-badge"><i class="fab fa-git-alt me-2"></i>Git</span>
+                        <span class="skill-badge"><i class="fab fa-figma me-2"></i>Figma</span>
+                        <span class="skill-badge"><i class="fab fa-adobe me-2"></i>Photoshop</span>
+                        <span class="skill-badge"><i class="fas fa-fire me-2"></i>Firebase</span>
+                        <span class="skill-badge"><i class="fab fa-node-js me-2"></i>Node.js</span>
+                        <span class="skill-badge"><i class="fas fa-database me-2"></i>MongoDB</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-5">
+        <div class="container">
+            <h2 class="section-title">My Work</h2>
+            <p class="text-center mb-5">Here are some of my recent projects. Each was carefully crafted to solve specific business problems while delivering exceptional user experiences.</p>
+            
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="card">
+                        <img src="images/Multi-vendor Ecommerce Marketplace.jpeg" class="card-img-top" alt="E-commerce website dashboard showing product listings with clean UI">
+                        <div class="card-body">
+                            <h5 class="card-title">Modern E-commerce Platform</h5>
+                            <p class="card-text">A comprehensive online store with React, Redux, and Firebase backend.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="badge bg-light text-dark me-2">React</span>
+                                    <span class="badge bg-light text-dark">Firebase</span>
+                                </div>
+                                <a href="#" class="btn btn-sm btn-outline-primary">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card">
+                        <img src="images/Dashboard - Page Analytics _ MUUDY.jpeg" class="card-img-top" alt="Sleek corporate dashboard with data visualization charts and KPIs">
+                        <div class="card-body">
+                            <h5 class="card-title">Business Analytics Dashboard</h5>
+                            <p class="card-text">Interactive data visualization powered by D3.js and React Charts.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="badge bg-light text-dark me-2">D3.js</span>
+                                    <span class="badge bg-light text-dark">Node.js</span>
+                                </div>
+                                <a href="#" class="btn btn-sm btn-outline-primary">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card">
+                        <img src="images/Fitness Tracker Dashboard Design.jpeg" class="card-img-top" alt="Mobile app interface showing fitness tracking with vibrant colors">
+                        <div class="card-body">
+                            <h5 class="card-title">Fitness Tracking App</h5>
+                            <p class="card-text">Cross-platform mobile application built with React Native.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="badge bg-light text-dark me-2">React Native</span>
+                                    <span class="badge bg-light text-dark">MongoDB</span>
+                                </div>
+                                <a href="#" class="btn btn-sm btn-outline-primary">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card">
+                        <img src="images/Trip planner mobile app ui kit _ Premium PSD.jpeg" class="card-img-top" alt="Travel booking platform with destination cards and search filters">
+                        <div class="card-body">
+                            <h5 class="card-title">Travel Booking Platform</h5>
+                            <p class="card-text">Full-stack travel booking system with secure payment integration.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="badge bg-light text-dark me-2">Node.js</span>
+                                    <span class="badge bg-light text-dark">Stripe</span>
+                                </div>
+                                <a href="#" class="btn btn-sm btn-outline-primary">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card">
+                        <img src="images/YC-SM14P 14 inch Smart Home Touch Control Panel - Portworld.jpeg" class="card-img-top" alt="Smart home control panel UI with room controls and energy monitoring">
+                        <div class="card-body">
+                            <h5 class="card-title">Smart Home Control Panel</h5>
+                            <p class="card-text">IoT device control and monitoring dashboard with real-time updates.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="badge bg-light text-dark me-2">WebSockets</span>
+                                    <span class="badge bg-light text-dark">MongoDB</span>
+                                </div>
+                                <a href="#" class="btn btn-sm btn-outline-primary">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card">
+                        <img src="images/HealthTrack_ Enhancing Patient Engagement and Operational Efficiency with CRM Software.jpeg" class="card-img-top" alt="Healthcare appointment booking system with calendar view">
+                        <div class="card-body">
+                            <h5 class="card-title">Healthcare Appointment System</h5>
+                            <p class="card-text">HIPAA-compliant medical scheduling solution for clinics.</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <span class="badge bg-light text-dark me-2">PHP</span>
+                                    <span class="badge bg-light text-dark">MySQL</span>
+                                </div>
+                                <a href="#" class="btn btn-sm btn-outline-primary">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-5">
+                <a href="#" class="btn btn-outline-primary">View All Projects</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Experience/Education Section -->
+    <section id="experience" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title">Experience & Education</h2>
+            
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <h4 class="mb-4 ps-4"><i class="bi bi-briefcase-fill me-2"></i> Work Experience</h4>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <h5>Senior Frontend Developer</h5>
+                            <p class="text-muted mb-2">Tech Solutions Inc. | Jan 2021 - Present</p>
+                            <ul>
+                                <li>Lead frontend development team of 5 engineers</li>
+                                <li>Implemented modern React architecture improving performance by 30%</li>
+                                <li>Mentored junior developers and conducted code reviews</li>
+                            </ul>
+                        </div>
+                        <div class="timeline-item">
+                            <h5>Frontend Developer</h5>
+                            <p class="text-muted mb-2">Digital Creative Agency | Mar 2018 - Dec 2020</p>
+                            <ul>
+                                <li>Developed responsive websites for 20+ clients across various industries</li>
+                                <li>Collaborated with designers to implement UI/UX best practices</li>
+                                <li>Improved page load speed by 45% through performance optimization</li>
+                            </ul>
+                        </div>
+                        <div class="timeline-item">
+                            <h5>Junior Web Developer</h5>
+                            <p class="text-muted mb-2">Freelance | Jun 2016 - Feb 2018</p>
+                            <ul>
+                                <li>Built custom WordPress themes and plugins for small businesses</li>
+                                <li>Assisted clients with website maintenance and updates</li>
+                                <li>Developed strong client communication and project management skills</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <h4 class="mb-4 ps-4"><i class="bi bi-book-fill me-2"></i> Education</h4>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <h5>M.S. Computer Science</h5>
+                            <p class="text-muted mb-2">State University | 2015 - 2017</p>
+                            <ul>
+                                <li>Specialization in Human-Computer Interaction</li>
+                                <li>Thesis: "Improving Mobile UX Through Behavioral Analysis"</li>
+                                <li>Graduated with honors (GPA: 3.8/4.0)</li>
+                            </ul>
+                        </div>
+                        <div class="timeline-item">
+                            <h5>B.S. Graphic Design</h5>
+                            <p class="text-muted mb-2">Art & Design College | 2011 - 2015</p>
+                            <ul>
+                                <li>Minor in Digital Media</li>
+                                <li>Senior project featured in annual design exhibition</li>
+                                <li>Developed foundational design and visual communication skills</li>
+                            </ul>
+                        </div>
+                        <div class="timeline-item">
+                            <h5>Web Development Bootcamp</h5>
+                            <p class="text-muted mb-2">Coding Academy | Summer 2015</p>
+                            <ul>
+                                <li>Intensive 10-week full-stack program</li>
+                                <li>Completed 5 portfolio projects</li>
+                                <li>Learned modern web technologies and development workflows</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="py-5">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <p class="text-center mb-5">Have a project in mind or want to discuss potential opportunities? Feel free to reach out!</p>
+            
+            <div class="row">
+                <div class="col-lg-5 mb-5 mb-lg-0">
+                    <div class="card h-100">
+                        <div class="card-body p-4">
+                            <h4 class="mb-4">Contact Information</h4>
+                            <div class="d-flex align-items-center mb-4">
+                                <i class="bi bi-geo-alt-fill fs-4 me-3" style="color: var(--primary);"></i>
+                                <div>
+                                    <h6 class="mb-1">Location</h6>
+                                    <p class="mb-0">karachi,pakistan</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center mb-4">
+                                <i class="bi bi-envelope-fill fs-4 me-3" style="color: var(--accent);"></i>
+                                <div>
+                                    <h6 class="mb-1">Email</h6>
+                                    <p class="mb-0">shapr034150@gmail.com</p>
+                                </div>
+                            </div>
+                            <div class="d-flex align-items-center mb-4">
+                                <i class="bi bi-phone-fill fs-4 me-3" style="color: var(--secondary);"></i>
+                                <div>
+                                    <h6 class="mb-1">Phone</h6>
+                                    <p class="mb-0">+923708189497</p>
+                                </div>
+                            </div>
+                            
+                            <h4 class="mt-5 mb-4">Social Profiles</h4>
+                            <div class="d-flex">
+                                <a href="https://github.com/" class="social-icon me-3"><i class="fab fa-github"></i></a>
+                                <a href="#" class="social-icon me-3"><i class="fab fa-linkedin-in"></i></a>
+                                <a href="#" class="social-icon me-3"><i class="fab fa-dribbble"></i></a>
+                                <a href="#" class="social-icon me-3"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="social-icon me-3"><i class="fab fa-behance"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="card">
+                        <div class="card-body p-4">
+                            <form class="contact-form">
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+                                        <label for="name" class="form-label">Your Name</label>
+                                        <input type="text" class="form-control" id="name" placeholder="Your name">
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+                                        <label for="email" class="form-label">Your Email</label>
+                                        <input type="email" class="form-control" id="email" placeholder="abc@example.com">
+                                    </div>
+                                </div>
+                                <div class="mb-4">
+                                    <label for="subject" class="form-label">Subject</label>
+                                    <input type="text" class="form-control" id="subject" placeholder="Project Inquiry">
+                                </div>
+                                <div class="mb-4">
+                                    <label for="message" class="form-label">Message</label>
+                                    <textarea class="form-control" id="message" rows="6" placeholder="Tell me about your project..."></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Send Message</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6 mb-4 mb-md-0">
+                    <h4 class="mb-3">MOHHAMAD HASSAN</h4>
+                    <p class="mb-0">Crafting exceptional digital experiences through clean code and thoughtful design.</p>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex justify-content-md-end">
+                        <a href="#home" class="btn btn-outline-light">
+                            <i class="bi bi-arrow-up"></i> Back to Top
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-4 bg-light">
+            <div class="row">
+                <div class="col-md-6 mb-3 mb-md-0">
+                    <p class="mb-0">&copy; 2025 MOHHAMAD HASSAN. All rights reserved.</p>
+                </div>
+                <div class="col-md-6">
+                    <div class="d-flex justify-content-md-end">
+                        <a href="#" class="text-white me-3">Privacy Policy</a>
+                        <a href="#" class="text-white">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Add active class to current section in navigation
+        window.addEventListener('scroll', function() {
+            const sections = document.querySelectorAll('section');
+            const navItems = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= (sectionTop - 100)) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === `#${current}`) {
+                    item.classList.add('active');
+                }
+            });
+        });
+        
+        // Form submission
+        const contactForm = document.querySelector('.contact-form');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Form validation
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const subject = document.getElementById('subject').value;
+                const message = document.getElementById('message').value;
+                
+                if (!name || !email || !subject || !message) {
+                    alert('Please fill in all fields');
+                    return;
+                }
+                
+                // Simulate form submission
+                const submitBtn = contactForm.querySelector('[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Sending...';
+                
+                // In a real application, you would send the form data to a server here
+                setTimeout(function() {
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                    alert('Message sent successfully! I will get back to you soon.');
+                    contactForm.reset();
+                }, 1500);
+            });
+        }
+    </script>
+</body>
+</html>
